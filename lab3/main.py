@@ -1,5 +1,6 @@
 import sys, getopt
 import chess
+import chess.svg
 from chessboard import display
 from evaluation import evaluation
 from negamax import negamax
@@ -11,9 +12,21 @@ import random
 board = chess.Board()
 displayBord = display.start()
 INF = float("inf")
-DEPTH = 2
+DEPTH = 3
 SEARCH_FUNC = "negamax"
 SLEEP_TIME = 0
+
+def endCondition(board, color):
+    if board.is_checkmate():
+        print(color + ' win')
+        svg = chess.svg.board(board)
+        with open('endGameBoard.svg', 'w') as file:
+            file.write(svg)
+        exit()
+    if board.is_fivefold_repetition():
+        print('Process stuck')
+        exit()
+    time.sleep(SLEEP_TIME)
 
 def bestMove(depth, board, searchfunc):
     legalMoves = board.legal_moves
@@ -70,10 +83,7 @@ def main(args):
         display.check_for_quit()
         display.update(board.fen(), displayBord)
 
-        if board.is_checkmate():
-            print('White win')
-            exit()
-        time.sleep(SLEEP_TIME)
+        endCondition(board, 'Black')
 
         newbestMove = bestMove(DEPTH, board, SEARCH_FUNC)
         print('Black move: ' + board.san(newbestMove))
@@ -82,10 +92,7 @@ def main(args):
         display.check_for_quit()
         display.update(board.fen(), displayBord)
 
-        if board.is_checkmate():
-            print('Black win')
-            exit()
-        time.sleep(SLEEP_TIME)
+        endCondition(board, 'White')
 
 if __name__ == "__main__":
    main(sys.argv[1:])
