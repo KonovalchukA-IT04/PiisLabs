@@ -4,7 +4,7 @@ def pvs(depth, board, alpha, beta):
     bestScore = float("-inf")
     b = beta
     if depth == 0:
-        return evaluation(board)
+        return -evaluation(board)
 
     for move in board.legal_moves:
         board.push(move)
@@ -17,7 +17,7 @@ def pvs(depth, board, alpha, beta):
                 bestScore = -pvs(depth - 1, board, -beta, -score)
 
         board.pop()
-        
+
         if alpha > beta:
             return alpha
         b = alpha + 1

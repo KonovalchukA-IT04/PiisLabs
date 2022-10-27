@@ -4,7 +4,7 @@ def negascout(depth, board, alpha, beta):
     bestScore = float("-inf")
     b = beta
     if depth == 0:
-        return evaluation(board)
+        return -evaluation(board)
 
     for move in board.legal_moves:
         board.push(move)

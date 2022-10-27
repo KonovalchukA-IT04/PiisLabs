@@ -4,7 +4,7 @@ def negamax(depth, board):
     max = float("-inf")
 
     if depth == 0:
-        return evaluation(board)
+        return -evaluation(board)
 
     for move in board.legal_moves:
         board.push(move)
