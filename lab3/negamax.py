@@ -1,7 +1,7 @@
 from evaluation import evaluation
 
 def negamax(depth, board):
-    max = float("-inf")
+    bestScore = float("-inf")
 
     if depth == 0:
         return -evaluation(board)
@@ -11,7 +11,7 @@ def negamax(depth, board):
         score = -negamax(depth - 1, board)
 
         board.pop()
-        if score > max:
-            max = score
+        if score > bestScore:
+            bestScore = score
             
-    return max
+    return bestScore

@@ -1,7 +1,7 @@
 from evaluation import evaluation
 
 def pvs(depth, board, alpha, beta):
-    bestScore = float("-inf")
+    bestScore = float("-inf") # a = alpha = -inf
     b = beta
     if depth == 0:
         return -evaluation(board)

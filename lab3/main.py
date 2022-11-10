@@ -12,9 +12,9 @@ import random
 board = chess.Board()
 displayBord = display.start()
 INF = float("inf")
-DEPTH = 3
+DEPTH = 2
 SEARCH_FUNC = "negamax"
-SLEEP_TIME = 0
+SLEEP_TIME = 0.25
 
 def endCondition(board, color):
     if board.is_checkmate():
